@@ -10,7 +10,7 @@ namespace OneMusic.DataAccessLayer.Repositories
 {
     public class GenericRepository<T> : IGenericDal<T> where T : class
     {
-        private readonly OneMusicContext _context;
+        protected readonly OneMusicContext _context;
 
         public GenericRepository(OneMusicContext context)
         {

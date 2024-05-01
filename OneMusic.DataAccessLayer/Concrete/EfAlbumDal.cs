@@ -1,4 +1,5 @@
-﻿using OneMusic.DataAccessLayer.Abstract;
+﻿using Microsoft.EntityFrameworkCore;
+using OneMusic.DataAccessLayer.Abstract;
 using OneMusic.DataAccessLayer.Context;
 using OneMusic.DataAccessLayer.Repositories;
 using OneMusic.EntityLayer.Entities;
@@ -14,6 +15,11 @@ namespace OneMusic.DataAccessLayer.Concrete
     {
         public EfAlbumDal(OneMusicContext context) : base(context)
         {
+        }
+
+        public List<Album> GetAllWithSinger()
+        {
+            return _context.Albums.Include(a => a.Singer).ToList();
         }
     }
 }
