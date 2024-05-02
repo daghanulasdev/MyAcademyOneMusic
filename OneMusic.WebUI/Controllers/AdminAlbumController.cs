@@ -15,7 +15,7 @@ namespace OneMusic.WebUI.Controllers
 
         public IActionResult Index()
         {
-            var values = _albumService.TGetAllWithSingers();
+            var values = _albumService.TGetAlbumWithSingers();
             return View(values);
         }
         public IActionResult DeleteAlbum(int id)
