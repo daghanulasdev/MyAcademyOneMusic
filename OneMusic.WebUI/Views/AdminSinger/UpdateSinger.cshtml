@@ -1,0 +1,19 @@
+﻿@model Singer
+@{
+    ViewData["Title"] = "Sanatçı Güncelleme";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<form method="post">
+    <label>#</label>
+    <input type="text" asp-for="SingerId" class="form-control" readonly />
+    <br />
+    <label>Sanatçı Resmi</label>
+    <input type="text" asp-for="ImageUrl" class="form-control" />
+    <br />
+    <label>Sanatçı Adı</label>
+    <input type="text" asp-for="SingerName" class="form-control" />
+    <br />
+    <button class="btn btn-outline-primary">Güncelle</button>
+</form>
+

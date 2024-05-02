@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OneMusic.BusinessLayer.Abstract;
+using OneMusic.EntityLayer.Entities;
 
 namespace OneMusic.WebUI.Controllers
 {
@@ -16,6 +17,36 @@ namespace OneMusic.WebUI.Controllers
         {
             var values = _albumService.TGetAllWithSingers();
             return View(values);
+        }
+        public IActionResult DeleteAlbum(int id)
+        {
+            _albumService.TDelete(id);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult AddSinger()
+        { return View(); }
+
+        [HttpPost]
+        public IActionResult AddAlbum(Album album)
+        {
+            _albumService.TCreate(album);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult UpdateSinger(int id)
+        {
+            var values = _albumService.TGetById(id);
+            return View(values);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateSinger(Album album)
+        {
+            _albumService.TUpdate(album);
+            return RedirectToAction("Index");
         }
     }
 }
