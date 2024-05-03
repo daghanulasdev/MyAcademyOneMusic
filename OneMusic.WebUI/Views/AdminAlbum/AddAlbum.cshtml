@@ -1,0 +1,22 @@
+﻿@model Album
+@{
+    ViewData["Title"] = "AddAlbum";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<form method="post">
+    <label>Sanatci Ismi</label>
+    @Html.DropDownListFor(x=>x.SingerId,(List<SelectListItem>)ViewBag.singerList, new { @class="form-control"})
+    <br />
+    <label>Kapak Resmi</label>
+    <input type="text" asp-for="CoverImage" class="form-control" />
+    <br />
+    <label>Album Ismi</label>
+    <input type="text" asp-for="AlbumName" class="form-control" />
+    <br />
+    <label>Fiyat</label>
+    <input type="text" asp-for="Price" class="form-control" />
+    <br />
+    <button class="btn btn-outline-primary">Kaydet</button>
+</form>
+

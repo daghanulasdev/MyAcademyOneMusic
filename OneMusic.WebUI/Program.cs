@@ -1,4 +1,5 @@
 using FluentValidation;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using OneMusic.BusinessLayer.Abstract;
 using OneMusic.BusinessLayer.Concrete;
 using OneMusic.BusinessLayer.Validators;
@@ -11,7 +12,7 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddIdentity<AppUser,AppRole>().AddEntityFrameworkStores<OneMusicContext>();
+builder.Services.AddIdentity<AppUser,AppRole>().AddEntityFrameworkStores<OneMusicContext>().AddErrorDescriber<CustomErrorDescriber>();
 builder.Services.AddScoped<IAboutDal, EfAboutDal>();
 builder.Services.AddScoped<IAboutService, AboutManager>();
 
@@ -36,7 +37,15 @@ builder.Services.AddScoped<ISongService, SongManager>();
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
 builder.Services.AddDbContext<OneMusicContext>();
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(option=>
+{
+    option.Filters.Add(new AuthorizeFilter());
+});
+
+builder.Services.ConfigureApplicationCookie(option =>
+{
+    option.LoginPath = "/Login/Index";
+});
 
 var app = builder.Build();
 
